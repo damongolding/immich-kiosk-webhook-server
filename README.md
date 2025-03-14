@@ -1,6 +1,7 @@
 # ImmichKiosk webhook server
 
-1. Copy or download the compose file from [here](https://github.com/immich-app/immich-kiosk-webhooks/blob/main/docker-compose.yml).
+1. Copy or download the compose file from [here](https://github.com/damongolding/immich-kiosk-webhook-server/blob/main/docker-compose.yaml).
+
 
 2. Create a .env file with the following content:
 
