@@ -78,7 +78,7 @@ def api_call(endpoint: str, method: str, data: dict) -> dict:
     return {}
 
 
-def add_to_album(album_id, asset_id):
+def add_to_album(album_id, asset_id) -> dict:
     """
     Add an asset to an album in Immich
 
