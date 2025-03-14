@@ -1,5 +1,5 @@
 services:
-  immich-kiosk:
+  immich-kiosk-webhook-server:
     image: ghcr.io/damongolding/immich-kiosk-webhook-server:latest
     container_name: immich-kiosk-webhook-server
     env_file:
