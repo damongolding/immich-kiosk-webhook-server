@@ -17,3 +17,11 @@ SECRET=secret_key
 ```bash
 docker compose up -d
 ```
+
+4. To add a webhook that uploads assets to the specified album in Kiosk, create a new webhook entry in the `config.yaml`:
+
+```yaml
+webhooks:
+  - url: http://IP:6000/add-to-album
+    event: asset.new
+```
