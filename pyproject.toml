@@ -3,7 +3,7 @@ name = "kiosk-webhooks"
 version = "0.1.0"
 description = "Add your description here"
 authors = [
-    { name = "Damon", email = "2184238+damongolding@users.noreply.github.com" }
+    { name = "Damon", email = "2184238+damongolding@users.noreply.github.com" },
 ]
 dependencies = [
     "flask>=3.1.0",
@@ -20,6 +20,7 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
+virtual = true
 dev-dependencies = []
 
 [tool.hatch.metadata]

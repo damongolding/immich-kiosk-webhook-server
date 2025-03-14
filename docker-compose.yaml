@@ -1,0 +1,13 @@
+services:
+  immich-kiosk:
+    image: damongolding/immich-kiosk-webhook-server:latest
+    container_name: immich-kiosk-webhook-server
+    tty: true
+    env_file:
+      - .env
+    environment:
+      LANG: "en_GB"
+      TZ: "Europe/London"
+    ports:
+      - 6000:6000
+    restart: always
