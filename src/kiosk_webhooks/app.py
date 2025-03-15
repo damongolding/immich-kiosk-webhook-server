@@ -139,17 +139,41 @@ def album():
             - ("Missing asset ID", 400) if assets list is missing
     """
     data = request.get_json()
-    assets = data.get("assets")
+    source = data.get("meta", {}).get("source", None)
 
-    if assets is None:
-        return "Missing asset ID", 400
+    # Webhook from immich-kiosk
+    if source is not None and source == "immich-kiosk":
 
-    for asset in assets:
-        assetID = asset.get("id")
+        assets = data.get("assets", None)
+
+        if assets is None:
+            return "Missing asset ID", 400
+
+        for asset in assets:
+            assetID = asset.get("id", None)
+
+            if assetID is None:
+                log.error("Invalid asset ID")
+                continue
+
+            try:
+                add_to_album(ALBUM_ID, assetID)
+
+            except Exception as e:
+                log.error(f"Failed to add asset to album: {e}")
+                return f"Failed to add asset to album: {e}", 500
+
+        log.info("Assets added to album")
+        return "Added to album", 200
+
+
+    # Webhook from immich-frame
+    if data.get("RequestedImageId", None) is not None:
+        assetID = data.get("RequestedImageId", None)
 
         if assetID is None:
             log.error("Invalid asset ID")
-            continue
+            return "Invalid asset ID", 400
 
         try:
             add_to_album(ALBUM_ID, assetID)
@@ -158,8 +182,10 @@ def album():
             log.error(f"Failed to add asset to album: {e}")
             return f"Failed to add asset to album: {e}", 500
 
-    log.info("Assets added to album")
-    return "Added to album", 200
+
+    return "Failed to add asset to album: unknown source", 500
+
+
 
 
 if __name__ == "__main__":
